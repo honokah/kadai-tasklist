@@ -46,7 +46,7 @@ class TasklistController extends Controller
      */
     public function store(Request $request)
     {
-        $tasklist = new Message;
+        $tasklist = new Tasklist;
         $tasklist->content = $request->content;
         $tasklist->save();
 

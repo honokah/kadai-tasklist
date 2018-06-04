@@ -48,7 +48,7 @@ class TasklistController extends Controller
     {
         $this->validate($request, [
             'status' => 'required|max:10',   // add
-            'content' => 'required|max:10',
+        
         ]);
         
         $tasklist = new Tasklist;
@@ -102,7 +102,6 @@ class TasklistController extends Controller
     {   
         $this->validate($request, [
             'status' => 'required|max:10',   // add
-            'content' => 'required|max:10',
         ]);
         
         

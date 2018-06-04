@@ -5,7 +5,11 @@
  <h1>タスク新規作成ページ</h1>
 
     {!! Form::model($tasklist, ['route' => 'tasklists.store']) !!}
-
+        
+        {!! Form::label('status', 'ステータス:') !!}
+        {!! Form::text('title') !!}
+        
+        
         {!! Form::label('content', 'タスク:') !!}
         {!! Form::text('content') !!}
 

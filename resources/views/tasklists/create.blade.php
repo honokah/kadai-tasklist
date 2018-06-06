@@ -6,20 +6,26 @@
  
    
     
-   
-
-    {!! Form::model($tasklist, ['route' => 'tasklists.store']) !!}
+   <div class="row">
         
-        {!! Form::label('status', 'ステータス:') !!}
-        {!! Form::text('status') !!}
+        <div class="col-xs-12","col-sm-8","col-lg-3">
         
+            {!! Form::model($tasklist, ['route' => 'tasklists.store']) !!}
+            
+                <div class="form-group">
+                    {!! Form::label('status', 'ステータス:') !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                </div>
+                    
+                <div class="form-group">
+                    {!! Form::label('content', 'タスク:') !!}
+                    {!! Form::text('content', null, ['class' => 'form-control']) !!}
+                </div>
+                
+                {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
         
-        {!! Form::label('content', 'タスク:') !!}
-        {!! Form::text('content') !!}
-
-        {!! Form::submit('投稿') !!}
-
-    {!! Form::close() !!}
-<!-- Write content for each page here -->
+            {!! Form::close() !!}
+        </div>
+    </div>
 
 @endsection

@@ -15,7 +15,7 @@
 
 
 
-Route::get('/', 'TasklistController@index');
+
 
 Route::get('/', 'TasklistController@index');
 Route::resource('tasklists', 'TasklistController');
@@ -34,13 +34,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tasklists', 'TasklistController', ['only' => ['store', 'destroy']]);
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    Route::resource('microposts', 'TasklistController', ['only' => ['store', 'destroy']]);
-});
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 });
+
+
+
 
 

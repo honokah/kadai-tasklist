@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Tasklist; 
 
+
 class TasklistController extends Controller
 {
     /**
@@ -15,13 +16,19 @@ class TasklistController extends Controller
      */
     public function index()
     {  
-       
-
-         $tasklists = Tasklist::all();
+      
+          
+        $tasklists = Tasklist::all();
 
         return view('tasklists.index', [
             'tasklists' => $tasklists,
         ]);
+        
+       
+        
+        
+        
+        
         //
     }
 

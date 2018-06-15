@@ -2,7 +2,11 @@
 
 @section('content')
 
-<h1>タスク一覧</h1>
+
+    @if (Auth::check())
+    
+    <h1>タスク一覧</h1>
+
 
       @if (count($tasklists) > 0)
         <table class="table table-striped">
@@ -23,8 +27,26 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+    	@endif
     
-    {!! link_to_route('tasklists.create', '新規タスクの投稿', null, ['class' => 'btn btn-primary']) !!}
+      {!! link_to_route('tasklists.create', '新規タスクの投稿', null, ['class' => 'btn btn-primary']) !!}
 
+    
+    
+    
+    
+    @else
+        <div class="center jumbotron">
+            <div class="text-center">
+                <h1>Welcome to Honoka's Twitter</h1>
+                {!! link_to_route('signup.get', 'Sign up now!', null, ['class' => 'btn btn-lg btn-primary']) !!}
+            </div>
+        </div>
+    @endif
+
+
+
+
+    
+  
 @endsection

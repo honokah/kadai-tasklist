@@ -4,7 +4,9 @@
 
 
     @if (Auth::check())
-    
+     <?php $user = Auth::user(); ?>
+        {{ $user->name }}  
+        
     <h1>タスク一覧</h1>
 
 

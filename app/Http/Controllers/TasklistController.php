@@ -16,21 +16,28 @@ class TasklistController extends Controller
      */
     public function index()
     {  
-      
-          
-        $tasklists = Tasklist::all();
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasklists = $user->tasklists()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('tasklists.index', [
-            'tasklists' => $tasklists,
-        ]);
+            $data = [
+                'user' => $user,
+                'tasklists' => $tasklists,
+            ];
+            $data += $this->counts($user);
+            return view('tasklists.index', $data);
+        }else {
+            return view('welcome');
+        }
+    }
         
+        
+               
        
         
         
         
-        
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +49,7 @@ class TasklistController extends Controller
          $tasklist = new Tasklist;
 
         return view('tasklists.create', [
-            'tasklist' => $tasklist,
+            'tasklists' => $tasklist,
         ]);
         //
     }
@@ -76,29 +83,25 @@ class TasklistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-         $tasklist = Tasklist::find($id);
-
+     {
+         if (\Auth::check()) {
+            $user = \Auth::user();
+             $tasklist = Tasklist::find($id);
+            $tasklists = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+              if (\Auth::user()->id === $tasklist->user_id) {
         return view('tasklists.show', [
             'tasklist' => $tasklist,
+            'user'=>$user,
+            'tasklists' => $tasklists,
         ]);
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-         $tasklist = Tasklist::find($id);
-
-        return view('tasklists.edit', [
-            'tasklist' => $tasklist,
-        ]);
-        //
+       } else{
+           return redirect ('/');
+       }
+            }else{
+           return view ('welcome');
+       }
+        
     }
 
     /**

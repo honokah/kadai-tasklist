@@ -10,10 +10,22 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         
-        return view('users.index', [
+        return view('tasklists.index', [
             'users' => $users,
         ]);
     }
+    
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        return view('tasklists.show', [
+            'user' => $user,
+        ]);
+    
+}
+
+
 }

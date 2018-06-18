@@ -28,9 +28,9 @@ class User extends Authenticatable
         
     ];
     
-    public function microposts()
+    public function tasklists()
     {
-        return $this->hasMany(Micropost::class);
+        return $this->hasMany(User::class);
     }
     
     

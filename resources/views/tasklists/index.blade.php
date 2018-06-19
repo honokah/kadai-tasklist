@@ -21,11 +21,13 @@
             </thead>
             <tbody>
                 @foreach ($tasklists as $tasklist)
+                @if(\Auth::user()->id==$tasklist->user_id)
                     <tr>
                         <td>{!! link_to_route('tasklists.show', $tasklist->id, ['id' => $tasklist->id]) !!}</td>
                         <td>{{ $tasklist->status }}</td>
                         <td>{{ $tasklist->content }}</td>
                     </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>

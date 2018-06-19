@@ -13,14 +13,16 @@ class CreateTasklistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('microposts', function (Blueprint $table) {
+        Schema::create('tasklists', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('content');
+            $table->string('status');
             $table->timestamps();
-
-            // Foreign key constraint
+            
+                        // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

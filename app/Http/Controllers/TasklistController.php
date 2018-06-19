@@ -16,6 +16,18 @@ class TasklistController extends Controller
      */
     public function index()
     {  
+       
+    
+        $tasklists = Tasklist::all();
+
+        return view('tasklists.index', [
+            'tasklists' => $tasklists,
+        ]);
+    
+
+        
+        
+        
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
@@ -26,7 +38,7 @@ class TasklistController extends Controller
                 'tasklists' => $tasklists,
             ];
             $data += $this->counts($user);
-            return view('tasklists.index', $data);
+            return view('tasklists.show', $data);
         }else {
             return view('welcome');
         }
@@ -49,7 +61,7 @@ class TasklistController extends Controller
          $tasklist = new Tasklist;
 
         return view('tasklists.create', [
-            'tasklists' => $tasklist,
+            'tasklist' => $tasklist,
         ]);
         //
     }
@@ -70,6 +82,7 @@ class TasklistController extends Controller
         $tasklist = new Tasklist;
         $tasklist->status = $request->status; 
         $tasklist->content = $request->content;
+        $tasklist->user_id = $request->user_id; 
         $tasklist->save();
 
         return redirect('/');
@@ -83,7 +96,17 @@ class TasklistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-     {
+     {   
+         $tasklist = Tasklist::find($id);
+
+        return view('tasklists.show', [
+            'tasklist' => $tasklist,
+        ]);
+         
+         
+         
+         
+         
          if (\Auth::check()) {
             $user = \Auth::user();
              $tasklist = Tasklist::find($id);
@@ -122,6 +145,7 @@ class TasklistController extends Controller
         $tasklist = Tasklist::find($id);
         $tasklist->status = $request->status; 
         $tasklist->content = $request->content;
+        $tasklist->user_id = $request->user_id; 
         $tasklist->save();//
         
          return redirect('/');
